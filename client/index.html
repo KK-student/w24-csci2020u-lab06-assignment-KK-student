@@ -2,18 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Lab 4 - HTML</title>
+    <title>Lab 6</title>
 		<link rel="stylesheet" href="./css/style.css">
   </head>
   <body>
     <script src="./js/main.js" defer></script>
-    <h1>Lab 5 - HTTP Requests</h1>
+    <h1>Lab 6</h1>
     <div class="row">
       <input id="name" placeholder="name">
       <input id="id" placeholder="id">
       <input id="gpa" placeholder="gpa">
       <button id="submit" type="button" onclick="add_record()">Submit</button>
     </div>
+		<div class="row">
+			<button id="to_json" type="button" onclick="postTableToServerAsJson()">To JSON</button>
+			<button id="to_csv" type="button">To CSV</button>
+			<button id="to_xml" type="button">To XML</button>
+		</div>
     <table id="chart">
       <thead>
         <tr>

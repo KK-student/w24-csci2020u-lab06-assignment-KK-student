@@ -42,7 +42,10 @@ function loadDataAsTable(response) {
 	}
 }
 
-let jsonDataUrl = "http://localhost:8080/lab5/api/students/json";
+let protocol = "http://";
+let domain = "localhost:8080/";
+let contextRoot = "lab6/";
+let jsonDataUrl = protocol + domain + contextRoot + "api/students/json";
 
 function add_record() {
 	// Get the values: 
@@ -61,15 +64,15 @@ function add_record() {
 	table.appendChild(newRow);
 	//Name: 
 	let nameCell = document.createElement("td");
-	nameCell.innerHTML = name;
+	nameCell.innerHTML = "<p>" + name + "</p>";
 	newRow.appendChild(nameCell);
 	//ID: 
 	let idCell = document.createElement("td");
-	idCell.innerHTML = id;
+	idCell.innerHTML = "<p>" + id + "</p>";
 	newRow.appendChild(idCell);
 	//GPA: 
 	let gpaCell = document.createElement("td");
-	gpaCell.innerHTML = gpa;
+	gpaCell.innerHTML = "<p>" + gpa + "</p>";
 	newRow.appendChild(gpaCell);
 
 	//Reset values: 
@@ -78,6 +81,52 @@ function add_record() {
 	document.getElementById("gpa").value = "";
 }
 
+let formatDataUrl = protocol + domain + contextRoot + "api/format/";
+function postTableToServerAsJson() {
+	let endpoint = "json";
+	let contentType = "application/json";
+	let url = formatDataUrl + endpoint;
+	const payload = document.getElementById("chart").innerHTML;
+	console.log(payload);
+
+	//Create a request to server. 
+	const request = new XMLHttpRequest();
+	request.open("POST", url);
+	request.setRequestHeader("Content-Type", "text/html"); // setting the sending content-type
+	request.setRequestHeader("Accept", contentType); // setting the receiving content-type
+
+	//On response handler: 
+	request.onload = () => {
+		if (request.status !== 200) {
+			console.error("Something went wrong went contacting the server. Got response: ");
+			console.error(request);
+			return
+		}
+		console.log("Received from the server: ", request.responseText) // this contains the received payload
+		/**
+		* this is how to programmatically download something in javascript.
+		* 1. create an invisible anchor tag
+		* 2. set the href attribute (contains file data)
+		* 3. set the download attribute (contains the file name)
+		* 4. click it
+		*/
+		var element = document.createElement('a');
+		element.setAttribute('href', `data:${contentType};charset=utf-8,` + encodeURIComponent(request.responseText));
+		element.setAttribute('download', `students.${endpoint}`);
+		element.click();
+	}
+
+	//Send request. 
+	request.send(payload);
+}
+
 (function () {
+	console.log(jsonDataUrl);
+	fetch(protocol + domain + contextRoot + "api/format/test", {
+		method: 'GET', 
+		headers: {
+			'Accept': 'text/plain'
+		}
+	}).then(response => console.log(response));
 	getStudentDataFromServer(jsonDataUrl);
 })();

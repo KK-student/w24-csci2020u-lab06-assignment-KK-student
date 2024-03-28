@@ -1,1 +1,2 @@
-lvim ./api/src/main/java/com/example/lab6/StudentResource.java ./api/src/main/java/com/example/lab6/APIFormatter.java ./api/src/main/java/com/example/lab6/Student.java ./client/index.html ./client/js/main.js ./client/css/style.css
+#lvim ./api/src/main/java/com/example/lab6/StudentResource.java ./api/src/main/java/com/example/lab6/APIFormatter.java ./api/src/main/java/com/example/lab6/Student.java ./client/index.html ./client/js/main.js ./client/css/style.css
+lvim $(fd .md .) $(fd .java ./api/src/main/java) $(fd .js ./client/js) $(fd .html ./client) $(fd .css ./client/css)
