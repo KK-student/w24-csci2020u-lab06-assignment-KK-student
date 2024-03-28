@@ -121,7 +121,7 @@ public class APIFormatter {
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.TEXT_HTML)
 	public Response xml(String body) {
-		ResponseBuilder baseResponse = Response.status(404).header("Access-Control-Allow-Origin", "*");
+		ResponseBuilder baseResponse = Response.status(404);
 		ResponseBuilder errorResponse = baseResponse.status(400);
 		ResponseBuilder okayResponse = baseResponse.status(200);
 		try {
