@@ -59,7 +59,7 @@ public class StudentResource {
         //return fileContents == null ? "NULL" : fileContents;
 				if (fileContents != null) {
 					response = Response.status(200)
-								.header("Access-Control-Allow-Origin", "*")
+								//.header("Access-Control-Allow-Origin", "*")
 								.header("Content-Type", "application/json")
 								.entity(fileContents)
 								.build();
@@ -79,7 +79,7 @@ public class StudentResource {
 				Response response; 
 				if (fileContents != null) {
 					response = Response.status(200)
-								.header("Access-Control-Allow-Origin", "*")
+								//.header("Access-Control-Allow-Origin", "*")
 								.header("Content-Type", "text/csv")
 								.entity(fileContents)
 								.build();
@@ -99,7 +99,7 @@ public class StudentResource {
 				Response response; 
 				if (fileContents != null) {
 					response = Response.status(200)
-								.header("Access-Control-Allow-Origin", "*")
+								//.header("Access-Control-Allow-Origin", "*")
 								.header("Content-Type", "application/xml")
 								.entity(fileContents)
 								.build();
