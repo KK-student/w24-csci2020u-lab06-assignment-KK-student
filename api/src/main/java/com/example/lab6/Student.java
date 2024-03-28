@@ -99,7 +99,7 @@ public class Student {
 	 * @return true if the id is greater than 100,000,000
 	 */
 	public boolean isValidId() {
-		return this.id > 100000000;
+		return this.id >= 100000000;
 	}
 
 	/**

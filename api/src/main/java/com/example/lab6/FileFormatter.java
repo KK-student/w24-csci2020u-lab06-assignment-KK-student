@@ -11,7 +11,7 @@ public class FileFormatter {
 	 * stores a list of Student objects in an instance
 	 * @param students the list of student objects
 	 */
-	public FileFormatter(Student[] students) {}
+	public FileFormatter(Student[] students) {this.students = students;}
 
 	/**
 	 * turns `this.students` into CSV format
@@ -25,6 +25,7 @@ public class FileFormatter {
 		builder.append(delimiter);
 		builder.append("gpa");
 		builder.append(delimiter);
+		builder.append("\n");
 		for (int i = 0; i < students.length; i++) {
 			Student student = students[i];
 			builder.append(student.name);
@@ -32,7 +33,10 @@ public class FileFormatter {
 			builder.append(student.id);
 			builder.append(delimiter);
 			builder.append(student.gpa);
-			if (i != students.length - 1) builder.append(delimiter);
+			if (i != students.length - 1) {
+				builder.append(delimiter);
+				builder.append("\n");
+			}
 		}
 
 		return builder.toString();
@@ -43,27 +47,27 @@ public class FileFormatter {
 	 * @return a formatted XML file
 	 */
 	public String toXML() {
-		StringBuilder builder = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<students>");
+		StringBuilder builder = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<students>\n");
 		for (int i = 0; i < students.length; i++) {
 			Student student = students[i];
-			builder.append("<student>");
+			builder.append("<student>\n");
 
 			builder.append("<name>");
 			builder.append(student.name);
-			builder.append("</name>");
+			builder.append("</name>\n");
 
 			builder.append("<id>");
 			builder.append(student.id);
-			builder.append("</id>");
+			builder.append("</id>\n");
 
 			builder.append("<gpa>");
 			builder.append(student.gpa);
-			builder.append("</gpa>");
+			builder.append("</gpa>\n");
 
-			builder.append("</student>");
+			builder.append("</student>\n");
 		}
 
-		builder.append("</sudents>");
+		builder.append("</sudents>\n");
 		return builder.toString();
 	}
 
@@ -91,7 +95,7 @@ public class FileFormatter {
 			builder.append("}");
 		}
 
-		builder.append("]\n}");
+		builder.append("]\n}\n");
 		return builder.toString();
 	}
 }

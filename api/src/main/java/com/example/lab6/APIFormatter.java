@@ -23,7 +23,7 @@ public class APIFormatter {
 		ResponseBuilder errorResponse = baseResponse.status(400);
 		ResponseBuilder okayResponse = baseResponse.status(200);*/
 		ResponseBuilder errorResponse = Response.status(400);
-		ResponseBuilder okayResponse = Response.status(200).header("Access-Control-Allow-Origin", "*");
+		ResponseBuilder okayResponse = Response.status(200);
 		try {
 			Student[] students;
 	
@@ -78,7 +78,8 @@ public class APIFormatter {
 	@Produces("text/csv")
 	@Consumes(MediaType.TEXT_HTML)
 	public Response csv(String body) {
-		ResponseBuilder baseResponse = Response.status(404).header("Access-Control-Allow-Origin", "*");
+		//ResponseBuilder baseResponse = Response.status(404).header("Access-Control-Allow-Origin", "*");
+		ResponseBuilder baseResponse = Response.status(404);
 		ResponseBuilder errorResponse = baseResponse.status(400);
 		ResponseBuilder okayResponse = baseResponse.status(200);
 		try {

@@ -82,9 +82,48 @@ function add_record() {
 }
 
 let formatDataUrl = protocol + domain + contextRoot + "api/format/";
-function postTableToServerAsJson() {
+
+function getJsonFromTable() {
 	let endpoint = "json";
 	let contentType = "application/json";
+	let url = formatDataUrl + endpoint;
+	const payload = document.getElementById("chart").innerHTML;
+	console.log(payload);
+
+	//Create a request to server. 
+	const request = new XMLHttpRequest();
+	request.open("POST", url);
+	request.setRequestHeader("Content-Type", "text/html"); // setting the sending content-type
+	request.setRequestHeader("Accept", contentType); // setting the receiving content-type
+
+	//On response handler: 
+	request.onload = () => {
+		if (request.status !== 200) {
+			console.error("Something went wrong went contacting the server. Got response: ");
+			console.error(request);
+			return
+		}
+		console.log("Received from the server: ", request.responseText) // this contains the received payload
+		/**
+		* this is how to programmatically download something in javascript.
+		* 1. create an invisible anchor tag
+		* 2. set the href attribute (contains file data)
+		* 3. set the download attribute (contains the file name)
+		* 4. click it
+		*/
+		var element = document.createElement('a');
+		element.setAttribute('href', `data:${contentType};charset=utf-8,` + encodeURIComponent(request.responseText));
+		element.setAttribute('download', `students.${endpoint}`);
+		element.click();
+	}
+
+	//Send request. 
+	request.send(payload);
+}
+
+function getCSVFromTable() {
+	let endpoint = "csv";
+	let contentType = "text/csv";
 	let url = formatDataUrl + endpoint;
 	const payload = document.getElementById("chart").innerHTML;
 	console.log(payload);
